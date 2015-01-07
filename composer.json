@@ -1,8 +1,8 @@
 {
 	"name": "xruff/apputils",
 	"type": "library",
-	"description": "CSV parser for Nette Framework",
-	"keywords": ["nette", "logger", "log"],
+	"description": "Utils for Nette Framework application",
+	"keywords": ["nette", "logger", "log", "settings", "configuration"],
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
 		{
