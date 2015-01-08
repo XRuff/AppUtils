@@ -22,7 +22,7 @@ $ composer require xruff/apputils:dev-master
 Documentation
 ------------
 
-Learn more in the [documentation](https://github.com/Ruff/AppUtils/blob/master/docs/en/index.md).
+Learn more in the [documentation](https://github.com/XRuff/AppUtils/blob/master/docs/en/index.md).
 
 Tests
 -----
