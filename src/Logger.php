@@ -6,11 +6,17 @@ use Nette\Object;
 use Nette\Database\Context;
 use Nette\Utils\DateTime;
 
-class Logger extends Object {
+/**
+ * Logger
+ *
+ * @author		Pavel Lauko <info@webengine.cz>
+ * @package		Core
+ */
+class Logger extends Object
+{
 
-	const
-		TABLE_NAME = 'log',
-		COLUMN_ID = 'id';
+	const TABLE_NAME = 'log';
+	const COLUMN_ID = 'id';
 
 	/* @var Context $database */
 	private $database;
@@ -18,7 +24,8 @@ class Logger extends Object {
 	/**
 	 * @param Context $database
 	 */
-	public function __construct(Context $database) {
+	public function __construct(Context $database)
+	{
 		$this->database = $database;
 	}
 
@@ -35,7 +42,6 @@ class Logger extends Object {
 		$type = 'info',
 		$status = 1,
 		$visibility = 1
-
 	) {
 		$values = array(
 			'users_id' => $user,
