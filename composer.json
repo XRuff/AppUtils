@@ -13,17 +13,17 @@
 		"issues": "https://github.com/XRuff/AppUtils/issues"
 	},
 	"require": {
-		"nette/utils": "^2.4",
-		"nette/database": "^2.4",
-		"nette/caching": "^2.4",
-		"nette/mail": "^2.4"
+		"nette/utils": "2.3.*",
+		"nette/database": "2.3.*",
+		"nette/caching": "2.3.*",
+		"nette/mail": "2.3.*"
 	},
 	"require-dev": {
-		"nette/utils": "^2.4",
-		"nette/database": "^2.4",
-		"nette/caching": "^2.4",
-		"nette/mail": "^2.4",
-		"tracy/tracy": "^2.4"
+		"nette/utils": "2.3.*",
+		"nette/database": "2.3.*",
+		"nette/caching": "2.3.*",
+		"nette/mail": "2.3.*",
+		"tracy/tracy": "2.3.*"
 	},
 	"autoload": {
 		"psr-4": {
