@@ -23,11 +23,16 @@
 		"nette/database": "2.3.*",
 		"nette/caching": "2.3.*",
 		"nette/mail": "2.3.*",
-		"tracy/tracy": "2.3.*"
+		"tracy/tracy": "2.3.*",
+		"vanio/coding-standards": "^0.1@dev"
 	},
 	"autoload": {
 		"psr-4": {
 			"XRuff\\App\\Model\\Utils\\": "src"
 		}
-	}
+	},
+	"scripts": {
+        "lint": "\"vendor/bin/phpcs\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --ignore=vendor .",
+        "fix": "\"vendor/bin/phpcbf\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --no-patch --ignore=vendor ."
+    }
 }
