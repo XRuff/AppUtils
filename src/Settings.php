@@ -2,10 +2,9 @@
 
 namespace XRuff\App\Model\Utils;
 
-use	Nette\Database\Context;
-use	Nette\Caching\Cache;
-use	Nette\Object;
-use	Tracy\Debugger;
+use Nette\Caching\Cache;
+use Nette\Database\Context;
+use Nette\Object;
 
 /**
  * Settings model
@@ -26,43 +25,43 @@ class Settings extends Object
 	/** @var Context */
 	private $database;
 
-	/*
-	* @param Context $database
-	* @param Cache $cache
-	*/
+	/**
+	 * @param Context $database
+	 * @param Cache $cache
+	 */
 	public function __construct(Context $database, Cache $cache)
 	{
 		$this->database = $database;
 		$this->cache = $cache;
 	}
 
-	/*
-	* @param int $domainId
-	* @return Nette\Database\Table\Selection
-	*/
+	/**
+	 * @param int $domainId
+	 * @return Nette\Database\Table\Selection
+	 */
 	private function getByDomain($domainId)
 	{
-		return $this->database->table(self::TABLE_NAME)->where( array(self::COLUMN_DOMAIN => $domainId) );
+		return $this->database->table(self::TABLE_NAME)->where([self::COLUMN_DOMAIN => $domainId]);
 	}
 
-	/*
-	* @param int $domainId
-	* @return XRuff\App\Model\Utils\Sett
-	*/
+	/**
+	 * @param int $domainId
+	 * @return XRuff\App\Model\Utils\Sett
+	 */
 	public function getSettings($domainId)
 	{
 		$self = $this;
-		$key = 'settings_'. $domainId;
-		$settings = $this->cache->load($key, function() use ($self, $key, $domainId) {
-			$settingsByDomain = $self->getByDomain ($domainId)->fetchPairs('key', 'value');
+		$key = 'settings_' . $domainId;
+		$settings = $this->cache->load($key, function () use ($self, $key, $domainId) {
+			$settingsByDomain = $self->getByDomain($domainId)->fetchPairs('key', 'value');
 			$settings = new Sett();
-			foreach ($settingsByDomain as $key => $value) {
-				$settings->{$key} = $value;
+			foreach ($settingsByDomain as $property => $value) {
+				$settings->{$property} = $value;
 			}
 
-			$self->cache->save($key, $settings, array(
-				Cache::TAGS => array("settings", $key),
-			));
+			$self->cache->save($key, $settings, [
+				Cache::TAGS => ['settings', $key],
+			]);
 
 			return $settings;
 		});
@@ -77,9 +76,9 @@ class Settings extends Object
 	 */
 	public function add($values)
 	{
-		$this->cache->clean(array(
-			Cache::TAGS => array('settings'),
-		));
+		$this->cache->clean([
+			Cache::TAGS => ['settings'],
+		]);
 
 		unset($values['id']);
 		return $this->database->table(self::TABLE_NAME)->insert($values);
@@ -92,9 +91,9 @@ class Settings extends Object
 	 */
 	public function edit($values)
 	{
-		$this->cache->clean(array(
-			Cache::TAGS => array('settings'),
-		));
+		$this->cache->clean([
+			Cache::TAGS => ['settings'],
+		]);
 
 		return $this->database
 						->table(self::TABLE_NAME)
