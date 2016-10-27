@@ -3,11 +3,8 @@
 namespace XRuff\App\Model\Utils;
 
 use Nette;
-use Nette\Database\Context;
+use Nette\Mail\IMailer;
 use Nette\Mail\Message;
-use Nette\Mail\SmtpMailer;
-use Latte\Engine;
-use Nette\DI\Container;
 
 /**
  * Email management.
@@ -15,33 +12,89 @@ use Nette\DI\Container;
 class Email extends Nette\Object
 {
 
-	/** @var Nette\Database\Context */
-	private $database;
+	/** @var IMailer */
+	private $mailer;
 
-	/** @var Nette\DI\Container */
-	private $config;
+	/** @var Message */
+	private $mail;
 
-	public function __construct(Context $database, Container $config)
+	public function __construct(IMailer $mailer)
 	{
-		$this->database = $database;
-		$this->config = $config;
+		$this->mailer = $mailer;
 	}
 
+	/**
+	 * Send plain text email.
+	 * @param string|array $from Email or format "John Doe" <doe@example.com> or array of those
+	 * @param string|array $to Email or format "John Doe" <doe@example.com> or array of those
+	 * @param string $subject
+	 * @param string $body
+	 */
 	public function send($from, $to, $subject, $body)
 	{
-		$mail = new Message;
-		$mail->setFrom($from)
-			->addTo($to)
-			->setSubject($subject)
-			->setHtmlBody($body);
-		$params = $this->config->getParameters();
-		$mailer = new SmtpMailer(array(
-			'host' => $params['mailer']['host'],
-			'username' => $params['mailer']['username'],
-			'password' => $params['mailer']['password'],
-			'port' => $params['mailer']['port']
-		));
-		$mailer->send($mail);
+		$mail = $this->composeMail($from, $to, $subject);
+		$mail->setBody($body);
+		$this->mailer->send($mail);
+	}
+
+	/**
+	 * Send plain html formated email.
+	 * @param string|array $from Email or format "John Doe" <doe@example.com> or array of those
+	 * @param string|array $to Email or format "John Doe" <doe@example.com> or array of those
+	 * @param string $subject
+	 * @param string $body
+	 */
+	public function sendHtml($from, $to, $subject, $body)
+	{
+		$mail = $this->composeMail($from, $to, $subject);
+		$mail->setHtmlBody($body);
+
+		$this->mailer->send($mail);
+	}
+
+	/**
+	 * Add email to mail message object
+	 * @param string|array $email
+	 */
+	private function addEmail($email)
+	{
+		if (is_array($email)) {
+			$this->mail->addTo($email[0], $email[1]);
+		} else {
+			$this->mail->addTo($email);
+		}
+	}
+
+	private function processToEmail($email)
+	{
+		if (is_array($email)) {
+			foreach ($email as $item) {
+				$this->addEmail($item);
+			}
+		} else {
+			$this->addEmail($email);
+		}
+		return $this;
+	}
+
+	private function processFromEmail($email)
+	{
+		$this->addEmail($email);
+		return $this;
+	}
+
+	private function composeMail($from, $to, $subject)
+	{
+		$this->mail = new Message;
+		$this->mail
+			->setFrom($from)
+			->setSubject($subject);
+
+		$this
+			->processFromEmail($from)
+			->processToEmail($to);
+
+		return $this->mail;
 	}
 
 }
