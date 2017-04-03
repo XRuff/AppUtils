@@ -48,7 +48,6 @@ class Email extends Nette\Object
 	{
 		$mail = $this->composeMail($from, $to, $subject);
 		$mail->setHtmlBody($body);
-
 		$this->mailer->send($mail);
 	}
 
@@ -74,12 +73,7 @@ class Email extends Nette\Object
 		} else {
 			$this->addEmail($email);
 		}
-		return $this;
-	}
 
-	private function processFromEmail($email)
-	{
-		$this->addEmail($email);
 		return $this;
 	}
 
@@ -90,9 +84,7 @@ class Email extends Nette\Object
 			->setFrom($from)
 			->setSubject($subject);
 
-		$this
-			->processFromEmail($from)
-			->processToEmail($to);
+		$this->processToEmail($to);
 
 		return $this->mail;
 	}
