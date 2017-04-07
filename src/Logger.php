@@ -4,6 +4,7 @@ namespace XRuff\App\Model\Utils;
 
 use Nette\Database\Context;
 use Nette\Object;
+use Nette\Security\User;
 use Nette\Utils\DateTime;
 
 /**
@@ -21,30 +22,33 @@ class Logger extends Object
 	/* @var Context $database */
 	private $database;
 
+	/* @var User $user */
+	private $user;
+
 	/**
 	 * @param Context $database
+	 * @param User $user
 	 */
-	public function __construct(Context $database)
+	public function __construct(Context $database, User $user)
 	{
 		$this->database = $database;
+		$this->user = $user;
 	}
 
 	/**
 	 * @param string $desc
-	 * @param int|null $user
 	 * @param string $type
 	 * @param int $status
 	 * @param int $visibility
 	 */
 	public function log(
 		$desc,
-		$user = null,
 		$type = 'info',
 		$status = 1,
 		$visibility = 1
 	) {
 		$values = [
-			'users_id' => $user,
+			'users_id' => $this->user->id,
 			'type' => $type,
 			'description' => $desc,
 			'status' => $status,
