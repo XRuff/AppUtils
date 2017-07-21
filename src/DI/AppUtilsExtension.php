@@ -19,10 +19,6 @@ class AppUtilsExtension extends Nette\DI\CompilerExtension
 			->setClass('XRuff\App\Model\Utils\Logger')
 			->setInject(false);
 
-		$builder->addDefinition($this->prefix('cache'))
-			->setClass('Nette\Caching\Cache')
-			->setInject(false);
-
 		$builder->addDefinition($this->prefix('settings'))
 			->setClass('XRuff\App\Model\Utils\Settings')
 			->setInject(false);
