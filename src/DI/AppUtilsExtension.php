@@ -3,6 +3,7 @@
 namespace XRuff\App\Model\Utils\DI;
 
 use Nette;
+use XRuff\App\Model\Utils\Caching;
 
 class AppUtilsExtension extends Nette\DI\CompilerExtension
 {
@@ -10,6 +11,10 @@ class AppUtilsExtension extends Nette\DI\CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 		$config = $this->getConfig();
+
+		$builder->addDefinition($this->prefix('cache'))
+			->setClass(Caching\Cache::class, ['@cacheStorage', 'XRuff.AppUtils'])
+			->setInject(FALSE);
 
 		$builder->addDefinition($this->prefix('email'))
 			->setClass('XRuff\App\Model\Utils\Email')

@@ -2,7 +2,7 @@
 
 namespace XRuff\App\Model\Utils;
 
-use Nette\Caching\Cache;
+use XRuff\App\Model\Utils\Caching\Cache;
 use Nette\Database\Context;
 use Nette\Object;
 
@@ -17,6 +17,7 @@ class Settings extends Object
 
 	const TABLE_NAME = 'settings';
 	const COLUMN_ID = 'id';
+	const COLUMN_GROUP = 'group';
 	const COLUMN_DOMAIN = 'domain_id';
 
 	/** @var Cache */
@@ -42,6 +43,19 @@ class Settings extends Object
 	private function getByDomain($domainId)
 	{
 		return $this->database->table(self::TABLE_NAME)->where([self::COLUMN_DOMAIN => $domainId]);
+	}
+
+	/**
+	 * @param string $group
+	 * @param int $domainId
+	 * @return Nette\Database\Table\Selection
+	 */
+	public function getByGroup($group, $domainId)
+	{
+		return $this->database
+			->table(self::TABLE_NAME)
+			->where([self::COLUMN_DOMAIN => $domainId])
+			->where([self::COLUMN_GROUP => $group]);
 	}
 
 	/**
@@ -76,9 +90,7 @@ class Settings extends Object
 	 */
 	public function add($values)
 	{
-		$this->cache->clean([
-			Cache::TAGS => ['settings'],
-		]);
+		$this->cache->clean();
 
 		unset($values['id']);
 		return $this->database->table(self::TABLE_NAME)->insert($values);
@@ -91,9 +103,7 @@ class Settings extends Object
 	 */
 	public function edit($values)
 	{
-		$this->cache->clean([
-			Cache::TAGS => ['settings'],
-		]);
+		$this->cache->clean();
 
 		return $this->database
 						->table(self::TABLE_NAME)
@@ -103,7 +113,7 @@ class Settings extends Object
 
 }
 
-class Sett extends \StdClass /* \Nette\Object */
+class Sett extends \StdClass
 {
 
 }
