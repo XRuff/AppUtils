@@ -31,6 +31,10 @@ class AppUtilsExtension extends Nette\DI\CompilerExtension
 		$builder->addDefinition($this->prefix('repository.domain'))
 			->setClass('XRuff\App\Model\Utils\Repositories\DomainRepository')
 			->setInject(false);
+
+		$builder->addDefinition($this->prefix('repository.settings'))
+			->setClass('XRuff\App\Model\Utils\Repositories\SettingsRepository')
+			->setInject(false);
 	}
 
 	/**
