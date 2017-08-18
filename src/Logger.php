@@ -25,6 +25,12 @@ class Logger extends Object
 	/* @var User $user */
 	private $user;
 
+	/* @var int $domainId */
+	private $domainId;
+
+	/* @var array $onLog */
+	public $onLog = [];
+
 	/**
 	 * @param Context $database
 	 * @param User $user
@@ -55,7 +61,20 @@ class Logger extends Object
 			'visibility' => $visibility,
 			'date_added' => new DateTime(),
 		];
-		return $this->database->table(self::TABLE_NAME)->insert($values);
+
+		if ($this->domainId) {
+			$values['domain_id'] = $this->domainId;
+		}
+
+		$logged = $this->database->table(self::TABLE_NAME)->insert($values);
+		$this->onLog($logged);
+		return $logged;
+	}
+
+	public function setDomainId($domainId)
+	{
+		$this->domainId = $domainId;
+		return $this;
 	}
 
 }

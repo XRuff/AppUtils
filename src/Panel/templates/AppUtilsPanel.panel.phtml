@@ -1,0 +1,60 @@
+<?php
+
+namespace XRuff\App\Model\Utils\Panel;
+
+use Nette\Database\Helpers;
+use Tracy;
+
+?>
+<style class="tracy-debug">
+	#tracy-debug .tracy-appUtilsPanel td {white-space: nowrap;}
+	#tracy-debug .tracy-appUtilsPanel td:nth-child(3) {font-weight: bold;}
+	#tracy-debug .tracy-appUtilsPanel td[colspan='2'] b {
+		float: right;
+		margin-left: 2em;
+	}
+</style>
+
+<h1 title="<?= '' ?>">Domain <?php echo $domainId ?></h1>
+
+<div class="tracy-inner tracy-appUtilsPanel">
+	<?php if (count($logEntries)): ?>
+	<h2>Log Entries</h2>
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>User</th>
+				<th>Type</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<?php foreach ($logEntries as $key => $value): ?>
+			<tr>
+				<td><?php echo $value['id']; ?></td>
+				<td><?php echo $value->ref('users_id')->email; ?></td>
+				<td><?php echo $value['type']; ?></td>
+				<td><?php echo $value['description']; ?></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+	<?php endif; ?>
+
+	<h2>Domain Settings</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<?php foreach ($settings as $key => $value): ?>
+			<tr>
+				<td><?php echo $key; ?></td>
+				<td><?php echo $value; ?></td>
+
+			</tr>
+		<?php endforeach; ?>
+	</table>
+
+</div>
