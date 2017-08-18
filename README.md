@@ -19,15 +19,6 @@ The best way to install XRuff/AppUtils is using  [Composer](http://getcomposer.o
 $ composer require xruff/apputils:dev-master
 ```
 
-Documentation
-------------
-
-Learn more in the [documentation](https://github.com/XRuff/AppUtils/blob/master/docs/en/index.md).
-
-Tests
------
-
-
 -----
 
 Repository [https://github.com/XRuff/AppUtils](https://github.com/XRuff/AppUtils).
