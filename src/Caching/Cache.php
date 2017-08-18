@@ -2,7 +2,6 @@
 
 namespace XRuff\App\Model\Utils\Caching;
 
-use Nette;
 use Nette\Caching;
 
 final class Cache extends Caching\Cache
@@ -14,7 +13,7 @@ final class Cache extends Caching\Cache
 	 *
 	 * @return void
 	 */
-	public function clean(array $conditions = NULL)
+	public function clean(array $conditions = null)
 	{
 		parent::clean([self::TAGS => ['settings']]);
 	}

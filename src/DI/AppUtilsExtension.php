@@ -14,7 +14,7 @@ class AppUtilsExtension extends Nette\DI\CompilerExtension
 
 		$builder->addDefinition($this->prefix('cache'))
 			->setClass(Caching\Cache::class, ['@cacheStorage', 'XRuff.AppUtils'])
-			->setInject(FALSE);
+			->setInject(false);
 
 		$builder->addDefinition($this->prefix('email'))
 			->setClass('XRuff\App\Model\Utils\Email')

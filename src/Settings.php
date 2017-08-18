@@ -2,9 +2,9 @@
 
 namespace XRuff\App\Model\Utils;
 
-use XRuff\App\Model\Utils\Caching\Cache;
 use Nette\Database\Context;
 use Nette\Object;
+use XRuff\App\Model\Utils\Caching\Cache;
 
 /**
  * Settings model
