@@ -32,7 +32,7 @@ use Tracy;
 		<?php foreach ($logEntries as $key => $value): ?>
 			<tr>
 				<td><?php echo $value['id']; ?></td>
-				<td><?php echo $value->ref('users_id')->email; ?></td>
+				<td><?php echo $value->ref('users_id') ? $value->ref('users_id')->email : ''; ?></td>
 				<td><?php echo $value['type']; ?></td>
 				<td><?php echo $value['description']; ?></td>
 			</tr>
