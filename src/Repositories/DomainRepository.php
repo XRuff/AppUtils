@@ -38,7 +38,7 @@ class DomainRepository extends BaseRepository {
 	{
 		return $this->findBy(
 			[
-				'url' => $host,
+				'url LIKE ?' => '%' . $host . '%',
 			]
 		)->fetch();
 	}
