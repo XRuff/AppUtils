@@ -9,8 +9,9 @@ use Nette\Mail\Message;
 /**
  * Email management.
  */
-class Email extends Nette\Object
+class Email
 {
+    use Nette\SmartObject;
 
 	/** @var IMailer */
 	private $mailer;

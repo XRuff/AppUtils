@@ -3,8 +3,8 @@
 namespace XRuff\App\Model\Utils;
 
 use Nette\Database\Context;
-use Nette\Object;
 use Nette\Security\User;
+use Nette\SmartObject;
 use Nette\Utils\DateTime;
 
 /**
@@ -13,8 +13,9 @@ use Nette\Utils\DateTime;
  * @author		Pavel Lauko <info@webengine.cz>
  * @package		Core
  */
-class Logger extends Object
+class Logger
 {
+    use SmartObject;
 
 	const TABLE_NAME = 'log';
 	const COLUMN_ID = 'id';

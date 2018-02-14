@@ -3,7 +3,7 @@
 namespace XRuff\App\Model\Utils;
 
 use Nette\Database\Context;
-use Nette\Object;
+use Nette\SmartObject;
 use XRuff\App\Model\Utils\Caching\Cache;
 
 /**
@@ -12,8 +12,9 @@ use XRuff\App\Model\Utils\Caching\Cache;
  * @author		Pavel Lauko <info@webengine.cz>
  * @package		Core
  */
-class Settings extends Object
+class Settings
 {
+    use SmartObject;
 
 	const TABLE_NAME = 'settings';
 	const COLUMN_ID = 'id';

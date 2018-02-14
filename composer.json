@@ -13,15 +13,15 @@
 		"issues": "https://github.com/XRuff/AppUtils/issues"
 	},
 	"require": {
-		"nette/utils": "~2.3",
-		"nette/database": "~2.3",
-		"nette/caching": "~2.3",
-		"nette/mail": "~2.3",
-		"nette/security": "~2.3",
+		"nette/utils": "~2.4",
+		"nette/database": "~2.4",
+		"nette/caching": "~2.4",
+		"nette/mail": "~2.4",
+		"nette/security": "~2.4",
 		"xruff/basedbmodel": "dev-master"
 	},
 	"require-dev": {
-		"tracy/tracy": "2.3.*",
+		"tracy/tracy": "2.4.*",
 		"vanio/coding-standards": "^0.1@dev"
 	},
 	"autoload": {
