@@ -13,15 +13,15 @@
 		"issues": "https://github.com/XRuff/AppUtils/issues"
 	},
 	"require": {
-		"nette/utils": "~2.4",
-		"nette/database": "~2.4",
-		"nette/caching": "~2.4",
-		"nette/mail": "~2.4",
-		"nette/security": "~2.4",
-		"xruff/basedbmodel": "dev-master"
+		"nette/utils": "^3.0",
+		"nette/database": "^3.0",
+		"nette/caching": "^3.0",
+		"nette/mail": "^3.0",
+		"nette/security": "^3.0",
+		"xruff/basedbmodel": "^3.0"
 	},
 	"require-dev": {
-		"tracy/tracy": "2.4.*",
+		"tracy/tracy": "^2.7",
 		"vanio/coding-standards": "^0.1@dev"
 	},
 	"autoload": {
@@ -29,6 +29,7 @@
 			"XRuff\\App\\Model\\Utils\\": "src"
 		}
 	},
+	"minimum-stability": "dev",
 	"scripts": {
         "lint": "\"vendor/bin/phpcs\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --ignore=vendor .",
         "fix": "\"vendor/bin/phpcbf\" --standard=ruleset.xml --extensions=php --encoding=utf-8 --no-patch --ignore=vendor ."
