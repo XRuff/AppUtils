@@ -13,7 +13,7 @@ final class Cache extends Caching\Cache
 	 *
 	 * @return void
 	 */
-	public function clean(array $conditions = null)
+	public function clean(array $conditions = null): void
 	{
 		parent::clean([self::TAGS => ['settings']]);
 	}
